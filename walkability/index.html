@@ -1,20 +1,143 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <link rel="stylesheet" href="style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-    </head>
-    <body>
-        <h1>Walkability Index</h1>
-        <p id="byline">  By: Farinna Izquierdo </p>
-        <div class = "divider"></div>
-        <p>The datasets I have chosen for analysis encompass an array of spatial and demographic information about Miami-Dade County (where I am from!).</p>
-        <img src = "images/rhode_island.png">
-        <p> I'm just writing a random paragraph here.</p>
-        <h2> About this project</h2>
-        <p> Here's a <a href="https://www.brown.edu/">link</a>.</p>
-        <img id="wide" src="images/walking.png">
+<head>
+    <script src="https://d3js.org/d3.v4.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <style>
+         body {
+            background-color: #f5edf5; /* Set the background color */
+        }
+        /* Define the style for the hyperlink */
+        a {
+            color: #FF81C6; /* Set the color using the provided hex code */
+            text-decoration: none; /* Remove underline if desired */
+        }
+        /* Define the style for the hyperlink when hovered over */
+        a:hover {
+            text-decoration: underline; /* Add underline when hovered over */
+        }
+        .container {
+            display: flex; /* Use flexbox for layout */
+            align-items: center; /* Align items vertically */
+        }
+        /* Define the style for the title */
+        h1 {
+            color: #FF73D7; /* Set the color */
+            font-size: 100px; /* Set the font size */
+        }
+        /* Define the style for the byline */
+        /* Define the style for the byline */
+        .byline {
+            font-size: 30px; /* Set the font size */
+            margin-left: 105px; /* Adjust margin if needed */
+            margin-top: -30px; /* Adjust to bring it closer to the title */
+        }
+        .popo-gif {
+            max-width: 200px; /* Limit the width of the image */
+            margin-left: 50px; /* Add margin to the right to create space between the image and text */
+            float: left; /* Float the image to the left */
+        }
+        .popo2 {
+            max-width: 200px; /* Limit the width of the image */
+            margin-right: 100px; /* Add margin to the right to create space between the image and text */
+            float: right; /* Float the image to the left */
+        }
+        .miami {
+            max-width: 200px; /* Limit the width of the image */
+            margin-left: 50px; /* Add margin to the right to create space between the image and text */
+            float: left; /* Float the image to the left */
+        }
+
+
+        /* Define additional styles here */
+        /* ... */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="text">
+            <h1>Does the National Walkability Index Walk &nbsp; the Walk?</h1>
+        </div>
+        <div class="image">
+            <img src="images/walk.gif" style="width: 500px;">
+        </div>
+    </div>
+    <p class="byline">By: Farinna Izquierdo</p>
+    <div class="divider"></div>
+        <p>Commuting options for a 21-year-old who still can’t drive (a.k.a me) are kind of limited:</p>
+        <ul>
+            <li>Ask a friend / family member for a ride</li>
+            <li>Call an Uber / Lyft</li>
+            <li>Take public transportation</li>
+            <li>Walk</li>
+        </ul>
+        <p> I was born and raised in Hialeah, a city located in Miami-Dade County. As a longtime resident of South Florida, I think most locals would agree that Miami-Dade is very car-dependent. </p>
+        <p>Miami does have several forms of public transportation: A public bus system, the Metrorail, the Metromover, the Tri-rail, and the Brightline. <a href="https://www.miamidade.gov/transit/library/rtr/2024-02-monthly-ridership-report.pdf">Although the county boasted a ridership figure of 77,514,395 in the 2023 fiscal year,</a> the city’s public transportation system has several shortcomings.  For instance, the railways are not extensive and only cover specific areas within the city, particularly as you approach downtown Miami. Although the city bus is the most utilized mode of public transportation, it is inefficient and considerably time-consuming for residents to navigate.</p>
+            <img id="popo" class="popo-gif" src="images/popo.gif">
+        <p>My fondness for public transportation and Miami's lack of quality and efficiency in its systems have always piqued my curiosity about how the city was designed. My objective for this project is to determine whether Miami-Dade is a walkable city according to the National Walkability Index.</p>
+        <h2> What is the National Walkability Index?</h2>
+        <p> The National Walkability Index is a nationwide geographic data resource compiled by the Environmental Protection Agency (EPA) that ranks block groups according to their relative walkability. The national dataset includes walkability scores for all block groups as well as the underlying attributes that are used to rank the block groups. Some important factors that are measured include intersection density, proximity to transit stops, and employment mix, among others.</p>
+        <p>For this analysis, I will examine the 2021 version of the Walkability Index, which utilizes block group boundary definitions from the 2010 Census, categorized by municipality. With this data, I will create a map that allows us to analyze walkability scores across Miami-Dade County.</p>
+        <img id="map" class="map-image" src="images/map2.png">
+        <p> Well, that's surprising! </p>
+        <p>For anyone wondering, the sections that are least walkable include parts of the <a href=https://www.nps.gov/ever/index.htm>Everglades</a>, <a href=https://www.nps.gov/bisc/index.htm>Biscayne National Park</a>, and <a href="https://myfwc.com/recreation/cooperative/big-cypress/#:~:text=Big%20Cypress%20WMA%20consists%20of,protecting%20the%20area's%20unique%20ecosystem.">Cypress Wildlife Management Area</a> - all are protected ecosystems that are (likely) uninhabited by humans. </p>
+        <p>Let’s take a closer look into the demographics of Miami-Dade's various neighborhoods, examining how their walkability levels correlate with resident profiles. </p>
+        <img id="race" class="race-image" src="images/race.png">
+        <p>As highlighted by the data, it's counterintuitive to see white people disproportionately represented in the least walkable areas. One might assume that areas with lower walkability would be poorer, thus having a higher proportion of residents who are people of color. However, the data shows that this isn't the case across Miami-Dade County. Let's see why:</p>
+        <p>The 3 lowest walkability scores across Miami-Dade belong to:</p>
+        <ul>
+            <li> Medley (7.00000)</li>
+            <li>Indian Creek Village (12.0000)</li>
+            <li>Cutler Bay (12.50556)</li>
+        </ul>
+        <div class="carousel-container">
+            <div class="slides">
+                <img src="images/medley.webp" alt="Medley">
+                <img src="images/indiancreek.PNG" alt="Indian Creek">
+                <img src="images/cutlerbay.jpeg" alt="Cutler Bay">
+            </div>
+        </div>        
+        <p class="scroll-to-see">Scroll to see!</p>
+        <p>Medley is known for its industrial and commercial areas.  Its lower walkability score may be attributed to its primarily industrial character, with a focus on warehouses, distribution centers, and manufacturing facilities. These types of areas typically prioritize vehicular traffic due to the heavy movement of goods and materials. <a href="https://datausa.io/profile/geo/medley-fl/#:~:text=925%20people-,In%202021%2C%20there%20were%205.52%20times%20more%20White%20(Hispanic),are%20hispanic%20(925%20people).">In 2021, there were 5.52 times more White (Hispanic) residents (779 people) in Medley, FL than any other race or ethnicity.</a></p> 
+        <p> On the other hand, the areas of Indian Creek Village and Cutler Bay are more affluent, with many neighborhoods featuring waterfront access and canal networks, making them perfect places to own boats. While these amenities enhance the appeal of these areas, they also shape infrastructure that prioritizes vehicular traffic over pedestrian needs. Additionally, these neighborhoods tend to have predominantly white populations, reflecting historical patterns of residential segregation and socioeconomic disparities. </p>
+        <p>I was genuinely surprised by the level of walkability in Miami-Dade County, especially given that many residents might avoid certain areas due to inefficiency or concerns about safety and crime. This prompted me to question the accuracy of the EPA’s Walkability Index in defining what truly constitutes a "walkable" environment. This leads me to my next question:</p>
+        <h2> Is Violent Crime Associated with Walkability?</h2>
+        <p>I aimed to analyze how crime rates varied across different levels of walkability in Miami-Dade County, with a specific focus on Opa-Locka, a neighborhood often perceived by residents as "dangerous" or "the hood." Given the prevalence of these perceptions, I sought to investigate whether they were grounded in reality or influenced by biases, particularly concerning the predominantly black population in the area. My objective was to explore the relationship between walkability and crime rates and assess the validity of these claims about Opa-Locka. To accomplish this, I utilized crime data from the FBI’s Uniform Crime Reporting Program for 2019 and integrated it with the Walkability Index for analysis.</p>
+        <img id="crime" class="crime-image" src="images/CRIME.PNG">
+        <p>As it turns out… Opa-Locka is just an outlier!</p>
+        <p>Across Miami-Dade, we observe a notable trend: areas with higher walkability tend to have lower crime rates per capita. However, there are exceptions, such as Florida City. Despite being characterized as <a href="https://www.covesmart.com/blog/crime-report-florida-s-most-dangerous-cities/#:~:text=Florida%20City%20is%20by%20far,dangerous%20cities%20in%20the%20country.">one of the most dangerous cities in the state </a> facing challenges like a high poverty rate (<a href="https://datausa.io/profile/geo/florida-city-fl/">according to 2021 Census Data</a>), Florida City does not conform to the expected pattern. Similarly, Opa-Locka, which ranks as the second most dangerous city in the state, challenges the overall trend we observed. These findings underscore the complex interplay of factors influencing crime rates beyond walkability alone.</p>
+
+        <p> Now that we've established how walkable Miami-Dade County is, how does it compare to the rest of the country?</p>
+        <h2>Exploring Walkability Scores Nationwide</h2>
+        <img id="national" class="national-image" src="images/national.png">
+        <p> Ranking 20th on the list, Miami-Dade is one of the most walkable cities in the country. Surprisingly, the highest walkability scores do not all belong to popular urban hubs like New York City or Chicago, but instead to counties consisting of relatively smaller yet walkable towns.</p>
+        <ul>
+            <li> 2nd: Falls Church City, VA (15.812)</li>
+            <li>3rd: Fairfax City, VA (15.666)</li>
+            <li>4th: Multnomah County, OR (15.415)</li>
+            <li>5th: Suffolk County, MA (14.936)</li>
+        </ul>
+        <p> Overall, the United States isn’t walkable. This is because big cities only make up a small percentage of the country. The majority of the United States comprises of small towns and rural areas, contributing to the average score of 6.508.</p>
+        <img id="miami" class="miami" src="images/miami.png">
+        <p>Urban areas often benefit from compact layouts, mixed land use, and well-connected transportation networks, which contribute to higher walkability scores. On the other hand, rural areas may face challenges such as greater distances between destinations, limited infrastructure for pedestrians, and reliance on personal vehicles for transportation.</p>
+        <p>However, it's important to note that walkability is not exclusive to urban environments. Rural communities can also prioritize pedestrian-friendly design elements such as sidewalks, crosswalks, and pedestrian pathways. Additionally, rural areas may offer unique opportunities for walking, such as scenic trails, parks, and natural landscapes. Ultimately, the diversity of high walkability scores across urban and rural areas highlights the importance of tailored approaches to community planning and design. By considering the unique characteristics and needs of each locality, policymakers and planners can create environments that promote walking and enhance overall quality of life, regardless of whether they are urban or rural in nature.</p>
+        <h2>Post-Project Reflection</h2>
+        <p>While it's heartening to discover that Miami-Dade ranks among the most walkable in the nation, it's also sobering to confront the disparities that persist within our own neighborhoods. Understanding the challenges faced by communities like Opa-Locka underscores the urgent need for action to improve walkability and safety, while also challenging stereotypes. While Opa-Locka may have some walkable areas, it's crucial to address safety concerns to ensure that it is a safe environment for everyone to walk in.</p>
+        <img id="popo2" class="popo2" src="images/popo.png">
+        <p>Moreover, Miami-Dade should prioritize building a better public transportation system to complement walkability. Despite the walkable nature of the area, the current transportation system may not be efficient, especially for longer distances or for those unable to walk. Enhancing public transportation options will provide essential mobility alternatives and further promote accessibility and inclusivity within the community.</p>
+        <p>This calls for community-driven initiatives, targeted interventions, and collaborative efforts aimed at addressing the underlying issues contributing to these disparities. By investing in infrastructure improvements, enhancing public safety measures, and fostering community engagement, we can create more inclusive and accessible environments that prioritize the well-being of all residents. This involves advocating for equitable urban planning policies, supporting local grassroots organizations, and amplifying the voices of marginalized communities to ensure that their needs are heard and addressed. Together, we can work towards building a healthier, safer, and more walkable community for everyone.</p>
+         
+
+
+
+
+
+
+
+       
     </body>
+    <script src="scripts/scatter.js"></script>
 </html>
